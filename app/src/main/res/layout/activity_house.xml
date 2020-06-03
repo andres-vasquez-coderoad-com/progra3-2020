@@ -13,13 +13,42 @@
         android:layout_marginBottom="40dp"
         android:background="@color/colorPrimaryDark" />
 
-    <ImageView
+    <RelativeLayout
         android:id="@+id/houseView"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_above="@id/groundView"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/casa" />
+        android:background="@drawable/casa">
+
+        <ImageView
+            android:id="@+id/windows1View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/ventana1" />
+
+        <ImageView
+            android:id="@+id/windows2View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/ventana2" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:srcCompat="@drawable/puerta"/>
+
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="300dp"
@@ -42,10 +71,20 @@
         android:id="@+id/treeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:layout_above="@id/groundView"
         android:layout_marginEnd="20dp"
         android:layout_toStartOf="@id/houseView"
+        android:adjustViewBounds="true"
         app:srcCompat="@drawable/arbol" />
+
+    <TextView
+        android:id="@+id/signatureView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Son las 08:37am" />
 
 </RelativeLayout>
