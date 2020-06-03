@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Clase hoy es 25 de mayo" />
+        android:text="Ayer por la manana di clases desde las 7:25 hasta las 8:30 debido a que tenia una llamada con un cliente en Mojix " />
 
     <Button
         android:id="@+id/button"
