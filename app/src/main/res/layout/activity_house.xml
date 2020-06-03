@@ -69,22 +69,27 @@
 
     <ImageView
         android:id="@+id/treeView"
+        android:onClick="treeClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/groundView"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="40dp"
         android:layout_toStartOf="@id/houseView"
         android:adjustViewBounds="true"
+        android:padding="5dp"
+        android:background="@color/colorAccent"
         app:srcCompat="@drawable/arbol" />
 
     <TextView
         android:id="@+id/signatureView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:textColor="#ffffff"
+        android:gravity="end"
         android:text="Son las 08:37am" />
 
 </RelativeLayout>

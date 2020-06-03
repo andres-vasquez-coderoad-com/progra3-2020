@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private String user;
@@ -30,5 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean login(String user, String password) {
         return user.equals("admin") && password.equals("123");
+    }
+
+    public void treeClick(View view) {
+        Toast.makeText(MainActivity.this, //Donde
+                "Click en el arbol", // Mensaje
+                Toast.LENGTH_SHORT) // Duracion
+                .show(); //Muestra
     }
 }
