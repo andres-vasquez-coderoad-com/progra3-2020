@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:paddingTop="20dp"
     android:paddingStart="20dp"
+    android:paddingTop="20dp"
     android:paddingEnd="20dp"
     tools:context=".LoginActivity">
 
@@ -47,6 +47,7 @@
 
             <Button
                 android:id="@+id/loginButton"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -65,8 +66,8 @@
         android:id="@+id/loginImageView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
         android:layout_above="@id/formLinearLayout"
+        android:adjustViewBounds="true"
         android:src="@drawable/login" />
 
 </RelativeLayout>
