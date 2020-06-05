@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">En casa</string>
     <string name="hello">Saludar!</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="remember">Mantener Sesión iniciada</string>
+    <string name="register">Registrar Usuario</string>
+    <string name="login">Ingresar</string>
 </resources>
