@@ -4,11 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:paddingStart="20dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="20dp"
     tools:context=".LoginActivity">
 
     <LinearLayout
+        android:id="@+id/formLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/style_form_login"
         android:orientation="vertical">
 
         <EditText
@@ -40,6 +47,7 @@
 
             <Button
                 android:id="@+id/loginButton"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -53,5 +61,13 @@
                 android:text="@string/register" />
         </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/loginImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/formLinearLayout"
+        android:adjustViewBounds="true"
+        android:src="@drawable/login" />
 
 </RelativeLayout>
