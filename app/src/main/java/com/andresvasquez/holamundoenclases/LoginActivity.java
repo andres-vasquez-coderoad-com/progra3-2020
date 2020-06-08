@@ -2,18 +2,40 @@ package com.andresvasquez.holamundoenclases;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
 
     public static String LOG = LoginActivity.class.getName();
+    private Button buttonLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Log.e(LOG, "onCreate");
+        getSupportActionBar().hide();
+
+        initViews();
+        addEvents();
+    }
+
+    private void initViews() {
+        buttonLogin = findViewById(R.id.loginButton);
+    }
+
+    private void addEvents() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent menuIntent = new Intent(LoginActivity.this, MenuActivity.class);
+                startActivity(menuIntent);
+            }
+        });
     }
 
     @Override
