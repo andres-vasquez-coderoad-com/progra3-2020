@@ -6,4 +6,6 @@
     <string name="remember">Mantener Sesión iniciada</string>
     <string name="register">Registrar Usuario</string>
     <string name="login">Ingresar</string>
+    <string name="error_empty">Valor requerido</string>
+    <string name="error_invalid_login">Usuario o contraseña incorrectos.</string>
 </resources>

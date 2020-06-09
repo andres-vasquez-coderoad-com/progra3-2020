@@ -6,4 +6,6 @@
     <string name="remember">Remember Me</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="error_empty">The value is required</string>
+    <string name="error_invalid_login">Username or password incorrect</string>
 </resources>
