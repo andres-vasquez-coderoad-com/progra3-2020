@@ -77,7 +77,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 //NO LLEGUE ACA
-                Intent menuIntent = new Intent(LoginActivity.this, MenuActivity.class);
+                Intent menuIntent = new Intent(
+                        LoginActivity.this, //Origen
+                        MenuActivity.class); //Destino
+                menuIntent.putExtra("name", userLogged.getName());
                 startActivity(menuIntent);
             }
         });

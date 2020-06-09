@@ -2,8 +2,10 @@ package com.andresvasquez.holamundoenclases;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -14,6 +16,16 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         Log.d(LOG, "onCreate");
+
+        receiveValues();
+    }
+
+    private void receiveValues() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("name")) {
+            String name = intent.getStringExtra("name");
+            Toast.makeText(MenuActivity.this, name, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
