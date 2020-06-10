@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.andresvasquez.holamundoenclases.model.User;
+import com.andresvasquez.holamundoenclases.utils.Constants;
+import com.google.gson.Gson;
+
 public class MenuActivity extends AppCompatActivity {
 
     public static String LOG = MenuActivity.class.getName();
@@ -21,10 +25,22 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void receiveValues() {
+        //1. Obtenemos el canal
         Intent intent = getIntent();
-        if (intent.hasExtra("name")) {
-            String name = intent.getStringExtra("name");
-            Toast.makeText(MenuActivity.this, name, Toast.LENGTH_SHORT).show();
+
+        //2. Verificamos que el canal tenga el mensaje con la clave: "objUser"
+        if (intent.hasExtra(Constants.INTENT_KEY_USER)) {
+
+            //3. Obtener el valor del mensaje con la clave: "objUser"
+            String userObj = intent.getStringExtra(Constants.INTENT_KEY_USER);
+
+            //4. Convertir el String a un Objeto
+            User user = new Gson().fromJson(userObj, User.class);
+
+            Toast.makeText(MenuActivity.this, //Origen
+                    "Bienvenid@: " + user.getName(), //Mensaje
+                    Toast.LENGTH_SHORT) //Duracion
+                    .show();
         }
     }
 

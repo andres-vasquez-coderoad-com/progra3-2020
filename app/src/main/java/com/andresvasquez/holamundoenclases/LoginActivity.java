@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.andresvasquez.holamundoenclases.model.User;
 import com.andresvasquez.holamundoenclases.repository.UserRepository;
+import com.andresvasquez.holamundoenclases.utils.Constants;
+import com.google.gson.Gson;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -77,10 +79,19 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 //NO LLEGUE ACA
+                //1. Creamos el canal
                 Intent menuIntent = new Intent(
                         LoginActivity.this, //Origen
                         MenuActivity.class); //Destino
-                menuIntent.putExtra("name", userLogged.getName());
+
+                //2. Convertimos el OBJ User --> String (serializando)
+                String userString = new Gson().toJson(userLogged);
+                Log.e("user", userString);
+
+                //3. Adicionamos el OBJ serializado como mensaje con la clave: "objUser"
+                menuIntent.putExtra(Constants.INTENT_KEY_USER, userString);
+
+                //4. Enviamos el mensaje
                 startActivity(menuIntent);
             }
         });
