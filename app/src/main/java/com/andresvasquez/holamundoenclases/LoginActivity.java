@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     //Views
     private RelativeLayout backgroundRelativeLayout;
     private Button buttonLogin;
+    private Button registerButton;
     private EditText usernameEditText;
     private EditText passwordEditText;
 
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initViews() {
         backgroundRelativeLayout = findViewById(R.id.backgroundRelativeLayout);
         buttonLogin = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
     }
@@ -93,6 +95,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 //4. Enviamos el mensaje
                 startActivity(menuIntent);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
             }
         });
     }
