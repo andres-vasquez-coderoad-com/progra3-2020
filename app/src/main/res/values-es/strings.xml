@@ -7,5 +7,9 @@
     <string name="register">Registrar Usuario</string>
     <string name="login">Ingresar</string>
     <string name="error_empty">Valor requerido</string>
+    <string name="error_empty_variable">El valor %s es requerido</string>
     <string name="error_invalid_login">Usuario o contraseña incorrectos.</string>
+    <string name="send">Enviar</string>
+    <string name="reset">Limpiar</string>
+    <string name="error_invalid_phone">Número de teléfono inválido</string>
 </resources>
