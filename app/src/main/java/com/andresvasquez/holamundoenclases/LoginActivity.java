@@ -69,8 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                UserRepository repository = new UserRepository();
-                User userLogged = repository.login(username, password);
+                User userLogged = UserRepository.getInstance().login(username, password);
                 if (userLogged == null) {
                     Toast.makeText(
                             LoginActivity.this, //Donde

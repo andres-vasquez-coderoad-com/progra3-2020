@@ -11,8 +11,8 @@ public class User {
     @Expose
     private String username;
 
-    @Expose(serialize = false, deserialize = false)
-    private String password;
+    @Expose
+    private transient String password;
 
     @Expose
     private String country;

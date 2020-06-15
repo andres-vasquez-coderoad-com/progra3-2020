@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.andresvasquez.holamundoenclases.model.User;
+import com.andresvasquez.holamundoenclases.repository.UserRepository;
 import com.andresvasquez.holamundoenclases.utils.DimensionUtils;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -227,6 +228,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 User objUser = new User(name, username, password, country);
                 objUser.setPhoneNumber(phoneNumber);
+                UserRepository.getInstance().register(objUser);
                 finish();
             }
         });
