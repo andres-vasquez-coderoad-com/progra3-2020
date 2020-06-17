@@ -6,7 +6,6 @@ public class QuarantineTask {
     private String duration;
     private String details;
     private boolean finished;
-
     private int image;
 
     public QuarantineTask(long id, String name, String duration, String details) {
