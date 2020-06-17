@@ -8,12 +8,13 @@ public class QuarantineTask {
     private boolean finished;
     private int image;
 
-    public QuarantineTask(long id, String name, String duration, String details) {
+    public QuarantineTask(long id, String name, String duration, String details, int image) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.details = details;
         this.finished = false;
+        this.image = image;
     }
 
     public long getId() {

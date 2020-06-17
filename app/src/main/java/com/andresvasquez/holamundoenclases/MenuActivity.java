@@ -44,6 +44,10 @@ public class MenuActivity extends AppCompatActivity {
         initViews();
         addEvents();
         fillQuarantineTasks();
+        fillQuarantineTasks();
+        fillQuarantineTasks();
+        fillQuarantineTasks();
+        fillQuarantineTasks();
     }
 
     private void receiveValues() {
@@ -114,8 +118,9 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 items.add(new QuarantineTask(items.size(), "Nuevo " + items.size(),
-                        "20m", "Nuevo ejercicio creado"));
+                        "20m", "Nuevo ejercicio creado", R.drawable.fitness));
                 adapter.notifyDataSetChanged();
+                taskListView.smoothScrollToPosition(items.size());
             }
         });
 
@@ -130,15 +135,16 @@ public class MenuActivity extends AppCompatActivity {
 
     private void fillQuarantineTasks() {
         items.add(new QuarantineTask(items.size(), "Trotar",
-                "30m", "Desde tu casa hasta la plaza, ida y vuelta"));
+                "30m", "Desde tu casa hasta la plaza, ida y vuelta", R.drawable.running));
         items.add(new QuarantineTask(items.size(), "Levantar pesas",
                 "1h",
-                "En el cuarto de pesas, si no tienes pesas, mete piedras a una mochila"));
+                "En el cuarto de pesas, si no tienes pesas, mete piedras a una mochila",
+                R.drawable.pesas));
         items.add(new QuarantineTask(items.size(), "Burpees",
                 "15m",
-                "4 series de 15"));
+                "4 series de 15", R.drawable.burpees));
         items.add(new QuarantineTask(items.size(), "Abdominales",
                 "15m",
-                "4 series de 12"));
+                "4 series de 12", R.drawable.abs));
     }
 }

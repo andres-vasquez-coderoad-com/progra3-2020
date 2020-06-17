@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andresvasquez.holamundoenclases.R;
@@ -56,6 +57,7 @@ public class TaskAdapter extends BaseAdapter {
             viewHolder.nameTextView = view.findViewById(R.id.nameTextView);
             viewHolder.detailsTextView = view.findViewById(R.id.detailsTextView);
             viewHolder.durationTextView = view.findViewById(R.id.durationTextView);
+            viewHolder.iconImageView = view.findViewById(R.id.iconImageView);
 
             view.setTag(viewHolder); //Guardar para reciclar
         } else {
@@ -68,7 +70,7 @@ public class TaskAdapter extends BaseAdapter {
         viewHolder.nameTextView.setText(task.getName());
         viewHolder.detailsTextView.setText(task.getDetails());
         viewHolder.durationTextView.setText(task.getDuration());
-
+        viewHolder.iconImageView.setImageResource(task.getImage());
         return view;
     }
 
@@ -76,5 +78,6 @@ public class TaskAdapter extends BaseAdapter {
         TextView nameTextView;
         TextView detailsTextView;
         TextView durationTextView;
+        ImageView iconImageView;
     }
 }
