@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Add" />
+
     <ListView
         android:id="@+id/taskListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/addButton"
         android:divider="@color/colorPrimary"
         android:dividerHeight="1dp" />
 </RelativeLayout>

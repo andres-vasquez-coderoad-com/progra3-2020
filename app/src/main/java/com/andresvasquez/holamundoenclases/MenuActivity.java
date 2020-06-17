@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.andresvasquez.holamundoenclases.adapter.TaskAdapter;
 import com.andresvasquez.holamundoenclases.model.QuarantineTask;
 import com.andresvasquez.holamundoenclases.model.User;
 import com.andresvasquez.holamundoenclases.utils.Constants;
@@ -24,6 +28,8 @@ public class MenuActivity extends AppCompatActivity {
     private Context context;
     private List<QuarantineTask> items = new ArrayList<>();
 
+    private Button addButton;
+    private TaskAdapter adapter;
     private ListView taskListView;
 
     @Override
@@ -97,23 +103,41 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        addButton = findViewById(R.id.addButton);
         taskListView = findViewById(R.id.taskListView);
+        adapter = new TaskAdapter(context, items);
+        taskListView.setAdapter(adapter);
     }
 
     private void addEvents() {
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                items.add(new QuarantineTask(items.size(), "Nuevo " + items.size(),
+                        "20m", "Nuevo ejercicio creado"));
+                adapter.notifyDataSetChanged();
+            }
+        });
 
+        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                QuarantineTask task = items.get(position);
+                Log.e("onItemClick", task.getName());
+            }
+        });
     }
 
     private void fillQuarantineTasks() {
-        items.add(new QuarantineTask(1, "Trotar",
+        items.add(new QuarantineTask(items.size(), "Trotar",
                 "30m", "Desde tu casa hasta la plaza, ida y vuelta"));
-        items.add(new QuarantineTask(2, "Levantar pesas",
+        items.add(new QuarantineTask(items.size(), "Levantar pesas",
                 "1h",
                 "En el cuarto de pesas, si no tienes pesas, mete piedras a una mochila"));
-        items.add(new QuarantineTask(3, "Burpees",
+        items.add(new QuarantineTask(items.size(), "Burpees",
                 "15m",
                 "4 series de 15"));
-        items.add(new QuarantineTask(4, "Abdominales",
+        items.add(new QuarantineTask(items.size(), "Abdominales",
                 "15m",
                 "4 series de 12"));
     }
