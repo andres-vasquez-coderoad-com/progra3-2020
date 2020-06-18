@@ -44,10 +44,6 @@ public class MenuActivity extends AppCompatActivity {
         initViews();
         addEvents();
         fillQuarantineTasks();
-        fillQuarantineTasks();
-        fillQuarantineTasks();
-        fillQuarantineTasks();
-        fillQuarantineTasks();
     }
 
     private void receiveValues() {
@@ -128,12 +124,23 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 QuarantineTask task = items.get(position);
-                Log.e("onItemClick", task.getName());
+                items.clear();
+                fillFitnessTasks();
+                adapter.notifyDataSetChanged();
             }
         });
     }
 
     private void fillQuarantineTasks() {
+        items.add(new QuarantineTask(items.size(), "Deportes",
+                "30m - 1h", "Ejercitate desde casa", R.drawable.fitness));
+        items.add(new QuarantineTask(items.size(), "Cocina",
+                "1h - 1h30m", "Aprende las mejores recetas", R.drawable.arbol));
+        items.add(new QuarantineTask(items.size(), "Aprender",
+                "30m - 45m", "Toma cursos en línea", R.drawable.arbol));
+    }
+
+    private void fillFitnessTasks() {
         items.add(new QuarantineTask(items.size(), "Trotar",
                 "30m", "Desde tu casa hasta la plaza, ida y vuelta", R.drawable.running));
         items.add(new QuarantineTask(items.size(), "Levantar pesas",
