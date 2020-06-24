@@ -63,6 +63,29 @@
                 android:layout_weight="1"
                 android:text="@string/register" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:onClick="call"
+                android:text="Tienes dudas?, llámanos" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:onClick="showMap"
+                android:text="Visítanos" />
+        </LinearLayout>
     </LinearLayout>
 
     <ImageView

@@ -3,6 +3,7 @@ package com.andresvasquez.holamundoenclases;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -161,5 +162,18 @@ public class LoginActivity extends AppCompatActivity {
         Log.e(LOG, "onDestroy");
     }
 
+    public void call(View view) {
+        /*Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hola me interesa saber más sobre la App");
+        intent.setType("text/plain");
+        startActivity(intent);*/
 
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "60507900"));
+        startActivity(intent);
+    }
+
+    public void showMap(View view) {
+
+    }
 }
