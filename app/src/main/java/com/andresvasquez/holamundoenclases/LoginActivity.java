@@ -174,6 +174,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void showMap(View view) {
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("geo:0,0?q=-16.499506,-68.123777"));
+        startActivity(intent);
 
+        /*String url = "https://attendance-68941.firebaseapp.com/home";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);*/
     }
 }
