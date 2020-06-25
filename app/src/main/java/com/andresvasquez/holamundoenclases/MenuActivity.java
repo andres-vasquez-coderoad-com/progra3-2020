@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.andresvasquez.holamundoenclases.adapter.TaskAdapter;
 import com.andresvasquez.holamundoenclases.model.QuarantineTask;
 import com.andresvasquez.holamundoenclases.model.User;
+import com.andresvasquez.holamundoenclases.repository.UserRepository;
 import com.andresvasquez.holamundoenclases.utils.Constants;
 import com.google.gson.Gson;
 
@@ -29,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
     private List<QuarantineTask> items = new ArrayList<>();
 
     private Button addButton;
+    private Button logoutButton;
     private TaskAdapter adapter;
     private ListView taskListView;
 
@@ -104,6 +106,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void initViews() {
         addButton = findViewById(R.id.addButton);
+        logoutButton = findViewById(R.id.logoutButton);
         taskListView = findViewById(R.id.taskListView);
         adapter = new TaskAdapter(context, items);
         taskListView.setAdapter(adapter);
@@ -117,6 +120,15 @@ public class MenuActivity extends AppCompatActivity {
                         "20m", "Nuevo ejercicio creado", R.drawable.fitness));
                 adapter.notifyDataSetChanged();
                 taskListView.smoothScrollToPosition(items.size());
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserRepository userRepository = new UserRepository(context);
+                userRepository.deleteUserLogged();
+                finish();
             }
         });
 

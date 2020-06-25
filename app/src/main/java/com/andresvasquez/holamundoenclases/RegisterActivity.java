@@ -228,7 +228,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 User objUser = new User(name, username, password, country);
                 objUser.setPhoneNumber(phoneNumber);
-                UserRepository.getInstance().register(objUser);
+
+                UserRepository userRepository = new UserRepository(context);
+                userRepository.register(objUser);
                 finish();
             }
         });

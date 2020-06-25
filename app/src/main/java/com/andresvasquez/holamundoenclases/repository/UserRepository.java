@@ -1,28 +1,28 @@
 package com.andresvasquez.holamundoenclases.repository;
 
-import com.andresvasquez.holamundoenclases.model.User;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
+import com.andresvasquez.holamundoenclases.model.User;
+import com.google.gson.Gson;
+
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class UserRepository {
 
-    //Paso 1: Crear la variable instance: static, UserRepository
-    private static UserRepository instance; //Mismo tipo que la clase
+    //Paso 0: Crear la instancia de Shared preferences
+    private SharedPreferences preferences;
+    private Context context;
     private List<User> users = new ArrayList<>();
 
-    //Paso 2: Crear la función getInstance : static, public y nos devuelve instance
-    //Todas las clases van ha llamar la instancia getInstance()
-    public static UserRepository getInstance() {
-        if (instance == null) {
-            instance = new UserRepository();
-        }
-        return instance;
-    }
-
-    //Paso 3: Convertir el constructor en privado
-    //Constructor es privado
-    private UserRepository() {
+    public UserRepository(Context context) {
+        //Paso 1: Cuando la instancia de UserRepository se crea, llenamos nuestra variable de preferencias
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
         defaultValues();
     }
 
@@ -38,6 +38,48 @@ public class UserRepository {
 
     public void register(User user) {
         users.add(user);
+    }
+
+    public void setUserLogged(User userLogged) {
+        //Obj --> String (serializar)
+        String userLoggedString = new Gson().toJson(userLogged);
+
+        //Editor y guardamos el string
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user", userLoggedString);
+
+        //Guardamos fecha y hora en miliseconds.
+        editor.putLong("timestamp", Calendar.getInstance().getTime().getTime());
+        editor.apply();
+    }
+
+    public User getUserLogged() {
+        if (preferences.contains("user")) {
+            String userLoggedString = preferences.getString("user", null);
+            if (userLoggedString != null) {
+
+                //Mostrar ultimo Login
+                if (preferences.contains("timestamp")) {
+                    long timestamp = preferences.getLong("timestamp", 0);
+                    Date date = new Date(timestamp);
+                    Log.e("Ultimo acceso", date.toLocaleString());
+                }
+
+
+                //String --> Obj (deserializar)
+                User userLogged = new Gson().fromJson(userLoggedString, User.class);
+                return userLogged;
+            }
+        }
+
+        return null;
+    }
+
+    public void deleteUserLogged() {
+        //Editor y eliminamos el valor
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("user");
+        editor.apply();
     }
 
     private void defaultValues() {

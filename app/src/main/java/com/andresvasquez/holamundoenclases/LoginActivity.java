@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button registerButton;
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private CheckBox rememberMeCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,21 @@ public class LoginActivity extends AppCompatActivity {
         Log.e(LOG, "onCreate");
         getSupportActionBar().hide();
 
-        initViews();
-        addEvents();
+        //Verificamos si el usuario existe
+        UserRepository userRepository = new UserRepository(LoginActivity.this);
+        User userLogged = userRepository.getUserLogged();
+        if (userLogged != null) {
+            Intent menuIntent = new Intent(
+                    LoginActivity.this, //Origen
+                    MenuActivity.class); //Destino
+            String userString = new Gson().toJson(userLogged);
+            Log.e("user", userString);
+            menuIntent.putExtra(Constants.INTENT_KEY_USER, userString);
+            startActivity(menuIntent);
+        } else {
+            initViews();
+            addEvents();
+        }
     }
 
     /**
@@ -50,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
     }
 
     /**
@@ -72,7 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                User userLogged = UserRepository.getInstance().login(username, password);
+                //Paso 1. Iniciar una instancia de UserRepository
+                UserRepository userRepository = new UserRepository(LoginActivity.this);
+                User userLogged = userRepository.login(username, password);
                 if (userLogged == null) {
                     Toast.makeText(
                             LoginActivity.this, //Donde
@@ -80,6 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT) //Por cuanto tiempo
                             .show();
                     return;
+                }
+
+                if (rememberMeCheckBox.isChecked()) {
+                    //Guardamos el objeto usuario en SharedPreferences
+                    userRepository.setUserLogged(userLogged);
                 }
 
                 //NO LLEGUE ACA
@@ -163,14 +186,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void call(View view) {
-        /*Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, "Hola me interesa saber más sobre la App");
+        intent.putExtra("ian", "estas atento");
         intent.setType("text/plain");
-        startActivity(intent);*/
-
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "60507900"));
         startActivity(intent);
+
+        /*Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "60507900"));
+        startActivity(intent);*/
     }
 
     public void showMap(View view) {
