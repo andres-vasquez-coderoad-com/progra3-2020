@@ -1,6 +1,7 @@
 package com.andresvasquez.holamundoenclases;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +17,13 @@ import com.andresvasquez.holamundoenclases.adapter.TaskAdapter;
 import com.andresvasquez.holamundoenclases.model.QuarantineTask;
 import com.andresvasquez.holamundoenclases.model.User;
 import com.andresvasquez.holamundoenclases.repository.UserRepository;
+import com.andresvasquez.holamundoenclases.repository.local.TasksRepository;
 import com.andresvasquez.holamundoenclases.utils.Constants;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -34,10 +37,16 @@ public class MenuActivity extends AppCompatActivity {
     private TaskAdapter adapter;
     private ListView taskListView;
 
+    //Paso 0: Definir la variable de repository
+    private TasksRepository tasksRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
+
+        //Paso 1: Instanciar el repository
+        tasksRepository = new TasksRepository(getApplication());
 
         setContentView(R.layout.activity_menu);
         Log.d(LOG, "onCreate");
@@ -45,7 +54,21 @@ public class MenuActivity extends AppCompatActivity {
         receiveValues();
         initViews();
         addEvents();
-        fillQuarantineTasks();
+        //fillQuarantineTasks();
+
+        //Paso 2: Observar los cambios en la db
+        tasksRepository.getAll().observe(this, new Observer<List<QuarantineTask>>() {
+            @Override
+            public void onChanged(List<QuarantineTask> quarantineTasks) {
+                Log.e("onChanged.quarantine", "" + quarantineTasks.size());
+                //Paso 2a: Actualizamos nuestra lista en el activity
+                items = quarantineTasks;
+
+                //Paso 2b: Actualizamos nuestra lista en el adapter
+                adapter.setItems(quarantineTasks);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void receiveValues() {
@@ -116,10 +139,13 @@ public class MenuActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                items.add(new QuarantineTask(items.size(), "Nuevo " + items.size(),
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+                fillQuarantineTasks(randomNum);
+
+                /*items.add(new QuarantineTask(items.size(), "Nuevo " + items.size(),
                         "20m", "Nuevo ejercicio creado", R.drawable.fitness));
                 adapter.notifyDataSetChanged();
-                taskListView.smoothScrollToPosition(items.size());
+                taskListView.smoothScrollToPosition(items.size());*/
             }
         });
 
@@ -143,13 +169,27 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    private void fillQuarantineTasks() {
-        items.add(new QuarantineTask(items.size(), "Deportes",
-                "30m - 1h", "Ejercitate desde casa", R.drawable.fitness));
-        items.add(new QuarantineTask(items.size(), "Cocina",
-                "1h - 1h30m", "Aprende las mejores recetas", R.drawable.arbol));
-        items.add(new QuarantineTask(items.size(), "Aprender",
-                "30m - 45m", "Toma cursos en línea", R.drawable.arbol));
+    private void fillQuarantineTasks(int random) {
+        QuarantineTask newTask = null;
+        switch (random) {
+            case 1:
+                newTask = new QuarantineTask(items.size(), "Deportes",
+                        "30m - 1h", "Ejercitate desde casa", R.drawable.fitness);
+                break;
+            case 2:
+                newTask = new QuarantineTask(items.size(), "Deportes",
+                        "30m - 1h", "Ejercitate desde casa", R.drawable.arbol);
+                break;
+            case 3:
+                newTask = new QuarantineTask(items.size(), "Deportes",
+                        "30m - 1h", "Ejercitate desde casa", R.drawable.running);
+                break;
+        }
+
+        if (newTask != null) {
+            //Paso 3: Insertar nueva Tarea.
+            tasksRepository.insert(newTask);
+        }
     }
 
     private void fillFitnessTasks() {

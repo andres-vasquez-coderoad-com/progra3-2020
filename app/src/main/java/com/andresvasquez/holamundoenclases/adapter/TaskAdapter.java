@@ -80,4 +80,8 @@ public class TaskAdapter extends BaseAdapter {
         TextView durationTextView;
         ImageView iconImageView;
     }
+
+    public void setItems(List<QuarantineTask> items) {
+        this.items = items;
+    }
 }

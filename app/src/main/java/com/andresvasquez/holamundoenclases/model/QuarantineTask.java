@@ -1,11 +1,30 @@
 package com.andresvasquez.holamundoenclases.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "quarantine_task")
 public class QuarantineTask {
+
+    @PrimaryKey
+    @ColumnInfo(name = "id")
     private long id;
+
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "duration")
     private String duration;
+
+    @ColumnInfo(name = "details")
     private String details;
+
+    @ColumnInfo(name = "finished")
     private boolean finished;
+
+    @ColumnInfo(name = "image")
     private int image;
 
     public QuarantineTask(long id, String name, String duration, String details, int image) {
