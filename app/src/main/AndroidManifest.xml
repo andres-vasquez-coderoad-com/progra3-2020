@@ -12,11 +12,13 @@
         android:roundIcon="@drawable/ic_access_time_black_24dp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecyclerViewActivity"></activity>
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".TaskDetails"></activity>
+        <activity android:name=".RecyclerViewActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

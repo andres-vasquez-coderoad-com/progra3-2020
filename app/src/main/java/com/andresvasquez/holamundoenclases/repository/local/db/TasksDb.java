@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.andresvasquez.holamundoenclases.model.QuarantineTask;
 import com.andresvasquez.holamundoenclases.repository.local.dao.TasksDao;
 
-@Database(entities = {QuarantineTask.class}, version = 1)
+@Database(entities = {QuarantineTask.class}, version = 2)
 public abstract class TasksDb extends RoomDatabase {
 
     public abstract TasksDao tasksDao();
@@ -20,7 +20,7 @@ public abstract class TasksDb extends RoomDatabase {
             synchronized (TasksDb.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TasksDb.class, "tasks_database")
+                            TasksDb.class, "tasks_database_2.db")
                             .build();
                 }
             }

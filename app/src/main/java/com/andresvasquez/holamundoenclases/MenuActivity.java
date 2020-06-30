@@ -69,6 +69,13 @@ public class MenuActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+
+        tasksRepository.getFinishedCount().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.d("Finished Tasks", "" + integer.toString());
+            }
+        });
     }
 
     private void receiveValues() {
@@ -139,7 +146,7 @@ public class MenuActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
                 fillQuarantineTasks(randomNum);
 
                 /*items.add(new QuarantineTask(items.size(), "Nuevo " + items.size(),
@@ -152,6 +159,7 @@ public class MenuActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tasksRepository.deleteAll();
                 UserRepository userRepository = new UserRepository(context);
                 userRepository.deleteUserLogged();
                 finish();
@@ -162,9 +170,13 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 QuarantineTask task = items.get(position);
-                items.clear();
+                Intent detailsIntent = new Intent(context, TaskDetails.class);
+                detailsIntent.putExtra("id", task.getId());
+                startActivity(detailsIntent);
+
+                /*items.clear();
                 fillFitnessTasks();
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();*/
             }
         });
     }
@@ -173,16 +185,31 @@ public class MenuActivity extends AppCompatActivity {
         QuarantineTask newTask = null;
         switch (random) {
             case 1:
-                newTask = new QuarantineTask(items.size(), "Deportes",
-                        "30m - 1h", "Ejercitate desde casa", R.drawable.fitness);
+                newTask = new QuarantineTask("Fitness",
+                        "30m - 1h", "Ejercitate desde casa con Zumba", R.drawable.fitness);
                 break;
             case 2:
-                newTask = new QuarantineTask(items.size(), "Deportes",
-                        "30m - 1h", "Ejercitate desde casa", R.drawable.arbol);
+                newTask = new QuarantineTask("Arbol",
+                        "15m", "Ejercitate desde casa trepando al arbol", R.drawable.arbol);
                 break;
             case 3:
-                newTask = new QuarantineTask(items.size(), "Deportes",
-                        "30m - 1h", "Ejercitate desde casa", R.drawable.running);
+                newTask = new QuarantineTask("Running",
+                        "45m - 1h", "Ejercitate desde casa corriendo", R.drawable.running);
+                break;
+            case 4:
+                newTask = new QuarantineTask("Trotar",
+                        "30m", "Desde tu casa hasta la plaza, ida y vuelta", R.drawable.running);
+                break;
+            case 5:
+                newTask = new QuarantineTask("Levantar pesas",
+                        "1h",
+                        "En el cuarto de pesas, si no tienes pesas, mete piedras a una mochila",
+                        R.drawable.pesas);
+                break;
+            case 6:
+                newTask = new QuarantineTask("Burpees",
+                        "15m",
+                        "4 series de 15", R.drawable.burpees);
                 break;
         }
 
@@ -193,16 +220,16 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void fillFitnessTasks() {
-        items.add(new QuarantineTask(items.size(), "Trotar",
+        items.add(new QuarantineTask("Trotar",
                 "30m", "Desde tu casa hasta la plaza, ida y vuelta", R.drawable.running));
-        items.add(new QuarantineTask(items.size(), "Levantar pesas",
+        items.add(new QuarantineTask("Levantar pesas",
                 "1h",
                 "En el cuarto de pesas, si no tienes pesas, mete piedras a una mochila",
                 R.drawable.pesas));
-        items.add(new QuarantineTask(items.size(), "Burpees",
+        items.add(new QuarantineTask("Burpees",
                 "15m",
                 "4 series de 15", R.drawable.burpees));
-        items.add(new QuarantineTask(items.size(), "Abdominales",
+        items.add(new QuarantineTask("Abdominales",
                 "15m",
                 "4 series de 12", R.drawable.abs));
     }

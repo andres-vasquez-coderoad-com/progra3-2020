@@ -61,15 +61,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
     }
 
     private void fillQuarantineTasks() {
-        items.add(new QuarantineTask(items.size(), "Burpees",
+        items.add(new QuarantineTask("Burpees",
                 "15m",
                 "4 series de 15", R.drawable.burpees));
-        items.add(new QuarantineTask(items.size(), "Abdominales",
+        items.add(new QuarantineTask( "Abdominales",
                 "15m",
                 "4 series de 12", R.drawable.abs));
-        items.add(new QuarantineTask(items.size(), "Trotar",
+        items.add(new QuarantineTask("Trotar",
                 "30m", "Desde tu casa hasta la plaza, ida y vuelta", R.drawable.running));
-        items.add(new QuarantineTask(items.size(), "Levantar pesas",
+        items.add(new QuarantineTask("Levantar pesas",
                 "1h",
                 "En el cuarto de pesas, si no tienes pesas, mete piedras a una mochila",
                 R.drawable.pesas));

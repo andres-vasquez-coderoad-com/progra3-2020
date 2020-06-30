@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "quarantine_task")
 public class QuarantineTask {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
 
@@ -27,8 +27,7 @@ public class QuarantineTask {
     @ColumnInfo(name = "image")
     private int image;
 
-    public QuarantineTask(long id, String name, String duration, String details, int image) {
-        this.id = id;
+    public QuarantineTask(String name, String duration, String details, int image) {
         this.name = name;
         this.duration = duration;
         this.details = details;

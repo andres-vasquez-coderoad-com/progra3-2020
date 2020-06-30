@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.andresvasquez.holamundoenclases.R;
@@ -54,6 +55,7 @@ public class TaskAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.quantine_task_layout, null);
 
             //Vincular los objetos con los IDs
+            viewHolder.parentLinearLayout = view.findViewById(R.id.parentLinearLayout);
             viewHolder.nameTextView = view.findViewById(R.id.nameTextView);
             viewHolder.detailsTextView = view.findViewById(R.id.detailsTextView);
             viewHolder.durationTextView = view.findViewById(R.id.durationTextView);
@@ -71,10 +73,17 @@ public class TaskAdapter extends BaseAdapter {
         viewHolder.detailsTextView.setText(task.getDetails());
         viewHolder.durationTextView.setText(task.getDuration());
         viewHolder.iconImageView.setImageResource(task.getImage());
+
+        if (task.isFinished()) {
+            viewHolder.parentLinearLayout.setBackgroundResource(R.drawable.style_border_finished);
+        } else {
+            viewHolder.parentLinearLayout.setBackgroundResource(R.drawable.style_border);
+        }
         return view;
     }
 
     static class ViewHolder {
+        LinearLayout parentLinearLayout;
         TextView nameTextView;
         TextView detailsTextView;
         TextView durationTextView;

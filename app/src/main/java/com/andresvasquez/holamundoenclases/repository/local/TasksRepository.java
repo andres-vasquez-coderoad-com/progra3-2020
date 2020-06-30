@@ -26,6 +26,16 @@ public class TasksRepository {
         thread.start();
     }
 
+    public void updateEntry(final QuarantineTask task) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db.tasksDao().updateEntry(task);
+            }
+        });
+        thread.start();
+    }
+
     public void deleteAll() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -38,5 +48,13 @@ public class TasksRepository {
 
     public LiveData<List<QuarantineTask>> getAll() {
         return db.tasksDao().getAll();
+    }
+
+    public LiveData<QuarantineTask> getById(long id) {
+        return db.tasksDao().getById(id);
+    }
+
+    public LiveData<Integer> getFinishedCount() {
+        return db.tasksDao().getFinishedCount(true);
     }
 }
